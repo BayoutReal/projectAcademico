@@ -1,0 +1,29 @@
+@model IEnumerable<ControleDeTrabalhosAcademicos.Models.Trabalho>
+
+<h2>Lista de Trabalhos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trabalho in Model)
+        {
+            <tr>
+                <td>@trabalho.Titulo</td>
+                <td>@trabalho.Tipo</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@trabalho.TrabalhoId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@trabalho.TrabalhoId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@trabalho.TrabalhoId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-action="Create">Criar Novo Trabalho</a>

@@ -1,0 +1,29 @@
+@model IEnumerable<ControleDeTrabalhosAcademicos.Models.Orientador>
+
+<h2>Lista de Orientadores</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Curso</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var orientador in Model)
+        {
+            <tr>
+                <td>@orientador.Nome</td>
+                <td>@orientador.Curso</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@orientador.OrientadorId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@orientador.OrientadorId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@orientador.OrientadorId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-action="Create">Criar Novo Orientador</a>

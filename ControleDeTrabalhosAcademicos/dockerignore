@@ -1,0 +1,14 @@
+**/.classpath
+**/.docker
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/Dockerfile*
+**/package.json
+**/README.md
+**/node_modules
+**/npm-debug.log
