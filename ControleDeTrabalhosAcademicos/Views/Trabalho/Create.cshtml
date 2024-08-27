@@ -1,21 +1,23 @@
 @model ControleDeTrabalhosAcademicos.Models.Trabalho
 
-<h2>Criar Novo Trabalho</h2>
+@{
+    ViewData["Title"] = "Create Trabalho";
+}
+
+<h2>Create New Trabalho</h2>
 
 <form asp-action="Create">
     <div class="form-group">
-        <label asp-for="Titulo"></label>
+        <label asp-for="Titulo" class="control-label"></label>
         <input asp-for="Titulo" class="form-control" />
         <span asp-validation-for="Titulo" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Tipo"></label>
-        <select asp-for="Tipo" class="form-control" asp-items="Html.GetEnumSelectList<TipoTrabalho>()"></select>
+        <label asp-for="Tipo" class="control-label"></label>
+        <input asp-for="Tipo" class="form-control" />
         <span asp-validation-for="Tipo" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
 </form>
-
-<div>
-    <a asp-action="Index">Voltar à Lista</a>
-</div>

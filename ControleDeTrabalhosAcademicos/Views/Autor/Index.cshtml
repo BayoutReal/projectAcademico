@@ -1,29 +1,36 @@
 @model IEnumerable<ControleDeTrabalhosAcademicos.Models.Autor>
 
-<h2>Lista de Autores</h2>
+@{
+    ViewData["Title"] = "Autores";
+}
+
+<h2>Autores</h2>
 
 <table class="table">
     <thead>
         <tr>
+            <th>Autor ID</th>
             <th>Nome</th>
             <th>Curso</th>
-            <th>Ações</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var autor in Model)
-        {
-            <tr>
-                <td>@autor.Nome</td>
-                <td>@autor.Curso</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@autor.AutorId">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@autor.AutorId">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@autor.AutorId">Excluir</a>
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.AutorId)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Curso)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AutorId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AutorId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AutorId">Delete</a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
 
-<a class="btn btn-primary" asp-action="Create">Criar Novo Autor</a>
+<p>
+    <a asp-action="Crea

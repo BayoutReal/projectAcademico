@@ -1,3 +1,5 @@
+// File: Data/TrabalhosContext.cs
+
 using Microsoft.EntityFrameworkCore;
 using ControleDeTrabalhosAcademicos.Models;
 
@@ -5,13 +7,14 @@ namespace ControleDeTrabalhosAcademicos.Data
 {
     public class TrabalhosContext : DbContext
     {
-        public TrabalhosContext(DbContextOptions<TrabalhosContext> options)
-            : base(options)
+        public TrabalhosContext(DbContextOptions<TrabalhosContext> options) : base(options)
         {
         }
 
+        public DbSet<Orientador> Orientadores { get; set; }
         public DbSet<Trabalho> Trabalhos { get; set; }
         public DbSet<Autor> Autores { get; set; }
-        public DbSet<Orientador> Orientadores { get; set; }
+
+        // Add other DbSet properties for your models as needed
     }
 }

@@ -1,29 +1,49 @@
 @model IEnumerable<ControleDeTrabalhosAcademicos.Models.Trabalho>
 
-<h2>Lista de Trabalhos</h2>
+@{
+    ViewData["Title"] = "Trabalhos";
+}
+
+<h2>Trabalhos</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Título</th>
-            <th>Tipo</th>
-            <th>Ações</th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().TrabalhoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Tipo)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var trabalho in Model)
-        {
-            <tr>
-                <td>@trabalho.Titulo</td>
-                <td>@trabalho.Tipo</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@trabalho.TrabalhoId">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@trabalho.TrabalhoId">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@trabalho.TrabalhoId">Excluir</a>
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrabalhoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TrabalhoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TrabalhoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TrabalhoId">Delete</a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
 
-<a class="btn btn-primary" asp-action="Create">Criar Novo Trabalho</a>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>

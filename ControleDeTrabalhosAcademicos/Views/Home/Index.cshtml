@@ -1,0 +1,47 @@
+@model IEnumerable<ControleDeTrabalhosAcademicos.Models.Trabalho>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Welcome to the Academic Works Control System</h2>
+
+<p>This system allows you to manage academic works, including authors and supervisors.</p>
+
+@if (Model != null && Model.Any())
+{
+    <h3>List of Trabalhos</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.First().Titulo)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Tipo)</th>
+                <th>@Html.DisplayNameFor(model => model.First().TrabalhoId)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrabalhoId)</td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Trabalho" asp-route-id="@item.TrabalhoId" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-controller="Trabalho" asp-route-id="@item.TrabalhoId" class="btn btn-info">Details</a>
+                    <a asp-action="Delete" asp-controller="Trabalho" asp-route-id="@item.TrabalhoId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No trabalhos available.</p>
+}
+
+<p>
+    <a asp-action="Create" asp-controller="Trabalho" class="btn btn-success">Create New Trabalho</a>
+</p>

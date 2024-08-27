@@ -19,30 +19,46 @@ namespace ControleDeTrabalhosAcademicos
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Register the application's DbContext with dependency injection, using SQL Server.
             services.AddDbContext<TrabalhosContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            // Register MVC services with support for controllers and views.
             services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Conditionally configure middleware based on the environment.
             if (env.IsDevelopment())
             {
+                // Use the detailed error page in the development environment.
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                // Use the custom error handler and HSTS in production.
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+
+            // Conditionally use HTTPS redirection, avoiding it in Docker and development environments.
+            if (!env.IsDevelopment() && !env.IsEnvironment("Docker"))
+            {
+                app.UseHttpsRedirection();
+            }
+
+            // Serve static files such as HTML, CSS, images, etc.
             app.UseStaticFiles();
 
+            // Enable routing for the application.
             app.UseRouting();
 
+            // Enable the authorization middleware.
             app.UseAuthorization();
 
+            // Configure endpoint routing for MVC controllers.
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

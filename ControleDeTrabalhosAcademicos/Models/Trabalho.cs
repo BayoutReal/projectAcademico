@@ -1,13 +1,13 @@
-using System.Collections.Generic;
-
 namespace ControleDeTrabalhosAcademicos.Models
 {
     public class Trabalho
     {
-        public int TrabalhoId { get; set; }
+        public int TrabalhoId { get; set; }  // Primary Key
         public string Titulo { get; set; }
-        public TipoTrabalho Tipo { get; set; }
-        public List<Autor> Autores { get; set; }
-        public List<Orientador> Orientadores { get; set; }
+        public string Tipo { get; set; }
+        
+        // Relationships
+        public ICollection<Autor> Autores { get; set; }
+        public ICollection<Orientador> Orientadores { get; set; }
     }
 }

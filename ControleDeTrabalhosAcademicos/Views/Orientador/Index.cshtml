@@ -1,29 +1,49 @@
 @model IEnumerable<ControleDeTrabalhosAcademicos.Models.Orientador>
 
-<h2>Lista de Orientadores</h2>
+@{
+    ViewData["Title"] = "Orientadores";
+}
+
+<h2>Orientadores</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Nome</th>
-            <th>Curso</th>
-            <th>Ações</th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().OrientadorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Curso)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var orientador in Model)
-        {
-            <tr>
-                <td>@orientador.Nome</td>
-                <td>@orientador.Curso</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@orientador.OrientadorId">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@orientador.OrientadorId">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@orientador.OrientadorId">Excluir</a>
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrientadorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OrientadorId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OrientadorId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrientadorId">Delete</a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
 
-<a class="btn btn-primary" asp-action="Create">Criar Novo Orientador</a>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>

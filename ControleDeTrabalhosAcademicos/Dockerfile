@@ -1,28 +1,29 @@
-# Etapa de build
+# Use the official ASP.NET Core runtime as a base image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+# Use the SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
-# Copia o arquivo de projeto e restaura dependências
-COPY *.csproj ./
+# Copy the project file and restore dependencies
+COPY ["ControleDeTrabalhosAcademicos.csproj", "./"]
 RUN dotnet restore "ControleDeTrabalhosAcademicos.csproj"
 
-# Copia o restante do código
+# Copy everything else and build the app
 COPY . .
-
-# Realiza o build especificando o arquivo de projeto
 RUN dotnet build "ControleDeTrabalhosAcademicos.csproj" -c Release -o /app/build
 
-# Etapa de publicação
+# Publish the app to the /app/publish directory
 FROM build AS publish
 RUN dotnet publish "ControleDeTrabalhosAcademicos.csproj" -c Release -o /app/publish
 
-# Etapa final (runtime)
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
+# Final stage/image
+FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-# Exponha a porta usada pela aplicação
-EXPOSE 80
-
-# Comando para iniciar a aplicação
+# Run the application
 ENTRYPOINT ["dotnet", "ControleDeTrabalhosAcademicos.dll"]
